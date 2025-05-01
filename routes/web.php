@@ -16,6 +16,9 @@ use App\Http\Controllers\ImportController;
 
 Route::get('/', [BoursierController::class, 'index'])->name('boursiers.index');
 Route::get('/boursiers', [BoursierController::class, 'boursiers'])->name('page_boursiers');
+
+Route::get('/boursiers/export/pdf', [BoursierController::class, 'exportPDF']) ->name('boursiers.export.pdf');
+
 Route::get('boursiers/{boursier:IDUS}', [BoursierController::class, 'show'])->name('boursiers.show');
 Route::get('boursiers/{boursier:IDUS}/edit', [BoursierController::class, 'edit'])->name('boursiers.edit');
 

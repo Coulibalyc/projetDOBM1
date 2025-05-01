@@ -48,10 +48,18 @@
                                     <option value="{{ $as }}" {{ request('annee_scolaire') == $as ? 'selected' : '' }}>{{ $as }}</option>
                                 @endforeach
                             </select>
+                            <select name="sexe" class="w-full rounded-md border border-gray-300 py-2">
+                                <option value="">Tous les genres</option>
+                                @foreach($sexe as $s)
+                                    <option value="{{ $s }}" {{ request('sexe') == $s ? 'selected' : '' }}>{{ $s }}</option>
+                                @endforeach
+                                    
+                            
+                            </select>
                         </div>
                         
                         <!-- Filtres avancés (caché par défaut) -->
-                        <div id="advancedFilters" class="mt-4 grid gap-4 md:grid-cols-3" style="display: none;">
+                        <!-- <div id="advancedFilters" class="mt-4 grid gap-4 md:grid-cols-3" style="display: none;">
                             <div class="grid gap-2">
                                 <label class="text-sm font-medium">Filière</label>
                                 <select name="filiere" class="w-full rounded-md border border-gray-300 py-2">
@@ -79,23 +87,24 @@
                                     value="{{ request('montant_max') }}"
                                 />
                             </div>
-                        </div>
+                        </div> -->
                         
                         <div class="mt-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
-                            <button type="button" id="toggleAdvancedFilters" class="inline-flex items-center gap-1 px-3 py-1 text-sm border rounded-md hover:bg-gray-100">
+                            <!-- <button type="button" id="toggleAdvancedFilters" class="inline-flex items-center gap-1 px-3 py-1 text-sm border rounded-md hover:bg-gray-100">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon></svg>
                                 Filtres avancés
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" id="chevronIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                            </button>
-                            <div class="flex flex-wrap items-center gap-2 mt-2 sm:mt-0">
+                            </button> -->
+                            <div class="flex flex-wrap items-center justify-end gap-2 mt-2 sm:mt-0 ml-auto">
                                 <a href="{{ route('page_boursiers') }}" class="inline-flex items-center px-3 py-1 text-sm border rounded-md hover:bg-gray-100">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="mr-2 h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="21" x2="4" y2="14"></line><line x1="4" y1="10" x2="4" y2="3"></line><line x1="12" y1="21" x2="12" y2="12"></line><line x1="12" y1="8" x2="12" y2="3"></line><line x1="20" y1="21" x2="20" y2="16"></line><line x1="20" y1="12" x2="20" y2="3"></line><line x1="1" y1="14" x2="7" y2="14"></line><line x1="9" y1="8" x2="15" y2="8"></line><line x1="17" y1="16" x2="23" y2="16"></line></svg>
                                     Réinitialiser
                                 </a>
-                                <a href="#" class="inline-flex items-center px-3 py-1 text-sm border rounded-md hover:bg-gray-100">
+                                <a href="{{ route('boursiers.export.pdf', request()->query()) }}"  class="inline-flex items-center px-3 py-1 text-sm border rounded-md hover:bg-gray-100 " target="_blank">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="mr-2 h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
                                     Exporter en PDF
                                 </a>
+                            
                             </div>
                         </div>
                     </form>

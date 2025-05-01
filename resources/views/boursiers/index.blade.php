@@ -162,7 +162,7 @@
   <div class="mt-6">
     <div class="rounded-lg border border-red-200 bg-red-50 p-6 shadow-lg">
       <div class="mb-4">
-        <h3 class="text-lg font-medium text-red-700">Boursiers Récents</h3>
+        <h3 class="text-lg font-medium text-red-700">Liste des boursiers</h3>
         <p class="text-sm text-red-600">Liste des derniers boursiers ajoutés</p>
       </div>
       
@@ -220,7 +220,7 @@
       </div>
       
       <div class="mt-4 flex justify-end">
-        <a href="{{ route('boursiers.index') }}" class="inline-flex items-center px-3 py-1 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none">
+        <a href="{{ route('page_boursiers') }}" class="inline-flex items-center px-3 py-1 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none">
           Voir tous les boursiers
         </a>
       </div>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\boursiers;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class BoursierController 
 {
@@ -103,6 +104,10 @@ class BoursierController
         if ($request->filled('annee_scolaire')) {
             $query->where('annee_scolaire', $request->annee_scolaire);
         }
+        // filtre par genre
+        if ($request->filled('sexe')) {
+            $query->where('sexe', $request->sexe);
+        }
         
         // Récupération des boursiers avec pagination
         $boursiers = $query->orderBy('nom')->paginate(10);
@@ -111,6 +116,7 @@ class BoursierController
         $pays = boursiers::distinct()->pluck('pays')->sort()->values();
         $cycles = boursiers::distinct()->pluck('cycle_formation_a_faire')->sort()->values();
         $annees_scolaires = boursiers::distinct()->pluck('annee_scolaire')->sort()->values();
+        $sexe = boursiers::distinct()->pluck('sexe')->sort()->values();
         
         // Ajout des statistiques nécessaires pour la vue
         $stats = [
@@ -137,7 +143,7 @@ class BoursierController
             'recentBoursiers' => boursiers::inRandomOrder()->take(5)->get(),
         ];
         
-        return view('boursiers.Page_boursiers', compact('boursiers', 'pays', 'cycles', 'annees_scolaires', 'stats'));
+        return view('boursiers.Page_boursiers', compact('boursiers', 'pays', 'cycles', 'annees_scolaires', 'stats','sexe'));
     }
 
     // Affiche le détail d'un boursier
@@ -171,11 +177,40 @@ class BoursierController
     }
 
     // Export des données
-    public function export(Request $request)
+    public function exportPDF(Request $request)
     {
-        // Logique d'exportation à implémenter
-        // ...
-        
-        return redirect()->back()->with('success', 'Export en cours de téléchargement.');
+        // 1. Construire la même query que pour l’affichage
+        $query = boursiers::query();
+        if ($request->filled('search')) {
+            $query->where(function($q) use($request){
+                $q->where('nom','like','%'.$request->search.'%')
+                  ->orWhere('prenoms','like','%'.$request->search.'%');
+            });
+        }
+        if ($request->filled('pays')) {
+            $query->where('pays', $request->pays);
+        }
+        if ($request->filled('cycle')) {
+            $query->where('cycle_formation_a_faire', $request->cycle);
+        }
+        if ($request->filled('annee_scolaire')) {
+            $query->where('annee_scolaire', $request->annee_scolaire);
+        }
+        if ($request->filled('sexe')) {
+            $query->where('sexe', $request->sexe);
+        }
+        // Ajoute ici les autres filtres avancés si besoin…
+    
+        // 2. Charger tous les boursiers filtrés
+        $boursiers = $query->orderBy('nom')->get();
+    
+        // 3. Générer le PDF depuis une vue dédiée
+        $pdf = Pdf::loadView('boursiers.pdf', compact('boursiers'))
+                  ->setPaper('a4', 'landscape')  // orientation paysage
+                  ->setWarnings(false);          // ne pas afficher les avertissements
+    
+        // 4. Retourner le PDF en streaming
+        return $pdf->stream('liste_boursiers.pdf');
     }
+    
 }
