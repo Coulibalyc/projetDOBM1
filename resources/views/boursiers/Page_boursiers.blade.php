@@ -4,7 +4,7 @@
 <div class="flex min-h-screen flex-col">
 
     <main class="flex-1">
-        <div class="container py-6">
+        <div class="container py-6 mx-auto">
             <div class="mb-6 flex items-center justify-between">
                 <h2 class="text-3xl font-bold">Liste des Boursiers</h2>
                 <!-- Bouton d'ajout supprimé -->

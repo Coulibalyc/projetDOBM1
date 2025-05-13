@@ -1,11 +1,8 @@
 <?php
 
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\BoursierController;
-use App\Http\Controllers\PaysController;
-use App\Http\Controllers\CycleController;
-use App\Http\Controllers\ImportController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,13 +10,30 @@ use App\Http\Controllers\ImportController;
 |--------------------------------------------------------------------------
 */
 
+require __DIR__.'/auth.php';
 
-Route::get('/', [BoursierController::class, 'index'])->name('boursiers.index');
-Route::get('/boursiers', [BoursierController::class, 'boursiers'])->name('page_boursiers');
+// Regroupe toutes les routes internes derrière l'authentification
+Route::middleware('auth')->group(function () {
+    // Tableau de bord (page index)
+    Route::get('/', [BoursierController::class, 'index'])
+         ->name('dashboard');
 
-Route::get('/boursiers/export/pdf', [BoursierController::class, 'exportPDF']) ->name('boursiers.export.pdf');
+    // Liste des boursiers
+    Route::get('/boursiers', [BoursierController::class, 'boursiers'])
+         ->name('page_boursiers');
 
-Route::get('boursiers/{boursier:IDUS}', [BoursierController::class, 'show'])->name('boursiers.show');
-Route::get('boursiers/{boursier:IDUS}/edit', [BoursierController::class, 'edit'])->name('boursiers.edit');
+    // Export PDF filtré
+    Route::get('/boursiers/export/pdf', [BoursierController::class, 'exportPDF'])
+         ->name('boursiers.export.pdf');
 
+    // Profil utilisateur (édition, mise à jour, suppression)
+    Route::get('/profile', [ProfileController::class, 'edit'])
+         ->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])
+         ->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])
+         ->name('profile.destroy');
+});
+
+// Routes d'authentification (login, register, etc.)
 

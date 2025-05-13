@@ -4,7 +4,7 @@
 @section('content')
 <div class="max-w-7xl mx-auto py-10">
   <div class="container py-6 px-4 -mt-20 -ml-4">
-    <h2 class="mb-2 text-3xl font-bold text-indigo-700">Tableau de bord</h2>
+    <h2 class="mb-2 text-3xl font-bold text-indigo-700 mt-10">Tableau de bord</h2>
   </div>
 
   <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
@@ -209,7 +209,7 @@
                 @endif
               </td>
               <td class="px-4 py-3 whitespace-nowrap">
-                <a href="{{ route('boursiers.show', $boursier->IDUS) }}" class="text-blue-600 hover:text-blue-900 hover:underline">
+                <a href="#" class="text-blue-600 hover:text-blue-900 hover:underline">
                   Détails
                 </a>
               </td>

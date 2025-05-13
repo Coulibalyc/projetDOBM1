@@ -147,34 +147,11 @@ class BoursierController
     }
 
     // Affiche le détail d'un boursier
-    public function show($idus)
-    {
-        $boursier = boursiers::findOrFail($idus);
-        
-        // Statistiques similaires pour contexte
-        $stats = [
-            'totalMemePays' => boursiers::where('pays', $boursier->pays)->count(),
-            'totalMemeFiliere' => boursiers::where('filiere_a_faire_renseigne', $boursier->filiere_a_faire_renseigne)->count(),
-        ];
-
-        return view('boursiers.show', [
-            'boursier' => $boursier,
-            'stats' => $stats
-        ]);
-    }
+   
+  
 
     // Affiche le formulaire d'édition (en lecture seule maintenant)
-    public function edit($idus)
-    {
-        $boursier = boursiers::findOrFail($idus);
 
-        return view('boursiers.show', [
-            'boursier' => $boursier,
-            'readOnly' => true,
-            'countries' => boursiers::distinct('pays')->orderBy('pays')->pluck('pays'),
-            'cycles' => ['Licence', 'Master', 'Doctorat']
-        ]);
-    }
 
     // Export des données
     public function exportPDF(Request $request)
