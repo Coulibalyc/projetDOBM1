@@ -35,5 +35,14 @@
             </main>
 
         </div>
+
+            <!-- Footer -->
+    <footer class="border-t bg-[#011f31]">
+        <div class="container mx-auto px-4 py-4 text-center">
+            <p class="text-sm text-white">
+                © {{ date('Y') }} DOBM - Gestion des Boursiers. Tous droits réservés.
+            </p>
+        </div>
+    </footer>
     </body>
 </html>

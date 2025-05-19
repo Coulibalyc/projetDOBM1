@@ -148,7 +148,11 @@ class BoursierController
 
     // Affiche le détail d'un boursier
    
-  
+      public function show(boursiers $boursier)
+    {
+        return view('boursiers.boursier_show', compact('boursier'));
+    }
+
 
     // Affiche le formulaire d'édition (en lecture seule maintenant)
 
@@ -189,5 +193,14 @@ class BoursierController
         // 4. Retourner le PDF en streaming
         return $pdf->stream('liste_boursiers.pdf');
     }
+
+
+    public function messagerie_boursiers()
+{
+    // récupère les messages de l’utilisateur (à implémenter selon ton modèle)
+    
+    return view('boursier.messagerie_boursiers');
+}
+
     
 }

@@ -18,6 +18,16 @@ Route::middleware('auth')->group(function () {
     Route::get('/', [BoursierController::class, 'index'])
          ->name('dashboard');
 
+     Route::get('/mesagerie', [BoursierController::class, 'messagerie_boursiers'])
+         ->name('me') ;
+     // Statistiques globales
+     Route::get('/statistiques', [App\Http\Controllers\BoursierController::class, 'statistiques'])
+     ->name('statistiques');
+
+     // Détail d’un boursier
+     Route::get('/boursiers/{boursier}', [BoursierController::class, 'show'])
+     ->name('boursier.show');
+
     // Liste des boursiers
     Route::get('/boursiers', [BoursierController::class, 'boursiers'])
          ->name('page_boursiers');
@@ -36,4 +46,3 @@ Route::middleware('auth')->group(function () {
 });
 
 // Routes d'authentification (login, register, etc.)
-

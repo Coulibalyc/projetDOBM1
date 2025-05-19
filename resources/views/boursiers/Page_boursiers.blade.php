@@ -139,9 +139,11 @@
                                     <td class="px-4 py-3">{{ $boursier->ETABLISSEMENT_ACCUEIL }}</td>
                                     <td class="px-4 py-3">{{ $boursier->MONT_BOURSE}} </td>
                                     <td class="px-4 py-3">{{ $boursier->ANNEE_SCOLAIRE }}</td>
-                                    <td class="px-4 py-3 text-right">
-                                     
-                                    </td>
+                                    <td class="px-4 py-3 whitespace-nowrap">
+                                         <a href="{{ route('boursier.show',$boursier) }}" class="text-blue-600 hover:text-blue-900 hover:underline">
+                                                Détails
+                                             </a>
+                                     </td>
                                 </tr>
                                 @empty
                                 <tr>

@@ -209,7 +209,7 @@
                 @endif
               </td>
               <td class="px-4 py-3 whitespace-nowrap">
-                <a href="#" class="text-blue-600 hover:text-blue-900 hover:underline">
+                <a href="{{ route('boursier.show',$boursier) }}" class="text-blue-600 hover:text-blue-900 hover:underline">
                   Détails
                 </a>
               </td>

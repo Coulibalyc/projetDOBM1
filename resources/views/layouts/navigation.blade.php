@@ -21,8 +21,11 @@
                 <x-nav-link href="/boursiers" :active="request()->is('boursiers*')">
                     Boursiers
                 </x-nav-link>
-                <x-nav-link href="/statistiques" :active="request()->is('statistiques*')">
+                <x-nav-link href="#" :active="request()->is('statistiques*')">
                     Statistiques
+                </x-nav-link>
+                <x-nav-link href="#" :active="request()->is('Messagerie*')">
+                    Messagerie
                 </x-nav-link>
             </div>
 
@@ -91,8 +94,11 @@
             <x-responsive-nav-link href="/boursiers" :active="request()->is('boursiers*')">
                 Boursiers
             </x-responsive-nav-link>
-            <x-responsive-nav-link href="/statistiques" :active="request()->is('statistiques*')">
+            <x-responsive-nav-link href="#" :active="request()->is('statistiques*')">
                 Statistiques
+            </x-responsive-nav-link>
+            <x-responsive-nav-link href="#" :active="request()->is('statistiques*')">
+                Messagerie
             </x-responsive-nav-link>
         </div>
 
