@@ -24,7 +24,7 @@
                 <x-nav-link href="#" :active="request()->is('statistiques*')">
                     Statistiques
                 </x-nav-link>
-                <x-nav-link href="#" :active="request()->is('Messagerie*')">
+                <x-nav-link href="/messages" :active="request()->is('Messagerie*')">
                     Messagerie
                 </x-nav-link>
             </div>

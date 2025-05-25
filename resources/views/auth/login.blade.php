@@ -1,18 +1,35 @@
-<!-- resources/views/auth/login.blade.php -->
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="csrf-token" content="{{ csrf_token() }}">
-  
+
   <title>{{ config('app.name', 'Laravel') }} — Connexion</title>
-  
+
+  <!-- Google Font -->
+  <link href="	https://fonts.google.com/specimen/Cinzel" rel="stylesheet">
+
   <!-- Tailwind + JS -->
   @vite(['resources/css/app.css', 'resources/js/app.js'])
-</head>
-<body class="min-h-screen bg-gray-100 dark:bg-gray-900 flex items-center justify-center">
 
+  <style>
+    .typing {
+      font-family: 'Cinzel', serif;
+      font-size: 1.8rem;
+      color: #4f46e5;
+      text-align: center;
+      margin-bottom: 1rem;
+      min-height: 2.5rem;
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-gray-100 dark:bg-gray-900 flex flex-col items-center justify-center p-4">
+
+  <!-- Phrase animée -->
+  <div class="typing" id="welcome-text"></div>
+
+  <!-- Cadre de connexion -->
   <div class="w-full max-w-md bg-white dark:bg-gray-800 shadow-lg rounded-lg p-6">
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
@@ -83,6 +100,22 @@
       </div>
     </form>
   </div>
+
+  <script>
+    const text = "Bienvenue sur MGSBHCI";
+    const target = document.getElementById("welcome-text");
+    let i = 0;
+
+    function typeWriter() {
+      if (i < text.length) {
+        target.innerHTML += text.charAt(i);
+        i++;
+        setTimeout(typeWriter, 100); // délai entre chaque lettre
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", typeWriter);
+  </script>
 
 </body>
 </html>

@@ -19,5 +19,8 @@
     },
     "dependencies": {
         "chart.js": "^4.4.8"
+    },
+    "optionalDependencies": {
+        "@rollup/rollup-win32-x64-msvc": "^4.41.0"
     }
 }

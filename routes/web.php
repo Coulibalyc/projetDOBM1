@@ -3,7 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BoursierController;
-
+use App\Http\Controllers\MessageController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -35,6 +35,14 @@ Route::middleware('auth')->group(function () {
     // Export PDF filtré
     Route::get('/boursiers/export/pdf', [BoursierController::class, 'exportPDF'])
          ->name('boursiers.export.pdf');
+
+    Route::get('/messages', [MessageController::class, 'index'])->name('messages.index');
+    Route::get('/messages/create/individual', [MessageController::class, 'createIndividual'])->name('messages.create.individual');
+    Route::post('/messages/individual', [MessageController::class, 'storeIndividual'])->name('messages.store.individual');
+    Route::get('/messages/create/group', [MessageController::class, 'createGroup'])->name('messages.create.group');
+    Route::post('/messages/group', [MessageController::class, 'storeGroup'])->name('messages.store.group');
+    Route::get('/messages/{conversation}', [MessageController::class, 'show'])->name('messages.show');
+    Route::post('/messages/{conversation}', [MessageController::class, 'store'])->name('messages.store');
 
     // Profil utilisateur (édition, mise à jour, suppression)
     Route::get('/profile', [ProfileController::class, 'edit'])
